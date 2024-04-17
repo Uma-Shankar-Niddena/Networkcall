@@ -1,0 +1,24 @@
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/players/
+
+###
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/players/2/
+
+###
+PUT https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/players/3/
+Content-Type:application/json
+
+{
+   "playerName": "Raju"
+}
+
+###
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/matches/18/
+
+### 
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/players/3/matches/
+
+###
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/matches/10/players/
+
+###
+GET https://umashankar3imvbnjscpscvyl.drops.nxtwave.tech/players/1/playerScores/
