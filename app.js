@@ -26,16 +26,16 @@ initializedbserver()
 ///GEt listof players in the playertable
 app.get('/players/', async (request, response) => {
   const querytogetallaplayer = `SELECT player_id as playerId, player_name as playerName from player_details`
-  const resfromdb = await db.all(querytogetallaplayer)
-  response.send(resfromdb)
+  const playerresfromdb = await db.all(querytogetallaplayer)
+  response.send(playerresfromdb)
 })
 
 ///GEt specific player with playerid
 app.get('/players/:playerId/', async (request, response) => {
   const {playerId} = request.params
-  const querygetSpecific = `SELECT player_id AS playerId, player_name AS playerName FROM player_details WHERE player_id=${playerId}`
-  const resfromdb = await db.all(querygetSpecific)
-  response.send(resfromdb)
+  const querygetSpecific = `SELECT player_id as playerId, player_name as playerName FROM player_details WHERE player_id=${playerId}`
+  const playeridresfromdb = await db.get(querygetSpecific)
+  response.send(playeridresfromdb)
 })
 
 ///PUT specific player by playerid
@@ -51,9 +51,9 @@ app.put('/players/:playerId/', async (request, response) => {
 /// GEt match details
 app.get('/matches/:matchId/', async (request, response) => {
   const {matchId} = request.params
-  const queryformatchdetails = `SELECT match_id AS matchId, match AS match, year AS year FROM match_details WHERE match_id =${matchId}`
-  const resfromdb = await db.all(queryformatchdetails)
-  response.send(resfromdb)
+  const queryformatchdetails = `SELECT match_id as matchId, match as match, year as year FROM match_details WHERE match_id =${matchId}`
+  const matchresfromdb = await db.get(queryformatchdetails)
+  response.send(matchresfromdb)
 })
 
 /// GET allthe matches of a player
@@ -61,8 +61,8 @@ app.get('/players/:playerId/matches/', async (request, response) => {
   const {playerId} = request.params
   const queryforplayer = `SELECT match_details.match_id AS matchId, match_details.match AS match, match_details.year AS year FROM match_details NATURAL JOIN player_details WHERE player_details.player_id=${playerId}`
 
-  const resfromdb = await db.all(queryforplayer)
-  response.send(resfromdb)
+  const matchderesfromdb = await db.all(queryforplayer)
+  response.send(matchderesfromdb)
 })
 
 /// GET list of players of a specific match
@@ -74,8 +74,8 @@ app.get('/matches/:matchId/players/', async (request, response) => {
 	      player_details.player_name AS playerName
 	    FROM player_match_score NATURAL JOIN player_details
         WHERE match_id=${matchId};`
-  const responsedb2 = await db.all(querytogetplayer)
-  response.send(responsedb2)
+  const listofplayerresfromdb = await db.all(querytogetplayer)
+  response.send(listofplayerresfromdb)
 })
 
 /// GET total fours scores sixes
@@ -90,7 +90,7 @@ app.get('/players/:playerId/playerScores/', async (request, response) => {
     player_details INNER JOIN player_match_score ON
     player_details.player_id = player_match_score.player_id
     WHERE player_details.player_id = ${playerId};`
-  const resfromdb = await db.get(queryforplayernames)
-  response.send(resfromdb)
+  const tatalscoreresfromdb = await db.get(queryforplayernames)
+  response.send(tatalscoreresfromdb)
 })
 module.exports = app
